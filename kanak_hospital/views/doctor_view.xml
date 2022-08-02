@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>	
+	<record id="view_hospital_doctor_tree" model="ir.ui.view">
+		<field name="name">hospital.doctor.tree</field>
+		<field name="model">hospital.doctor</field>
+		<field name="arch" type="xml">
+			<tree decoration-success="gender == 'male'" decoration-info = "gender == 'female'">
+				<field name="name" string="Doctor Name" optional="show"/>
+				<field name="dob" string="Date of Birth" optional="show"/>
+				<field name="specialist" optional="show"/> 
+				<field name="gender" widget="badge" optional="show" decoration-success="gender == 'male'" decoration-info = "gender == 'female'"/> 
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_hospital_doctor_form" model="ir.ui.view">
+		<field name="name">hospital.doctor.form</field>
+		<field name="model">hospital.doctor</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box">				
+					</div>
+					<h1>Doctors Details </h1>
+					<field name="image" widget="image" class="oe_avatar" height="200px" width="200px"/>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="gender"/> 
+						
+							<field name="charges"/>
+						</group>
+						<group>
+							<field name="specialist"/> 
+							<field name="dob"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id = "view_hospita_doctor_kanban" model = "ir.ui.view">
+		<field name="name">hospital.doctor.kanban</field>
+		<field name="model">hospital.doctor</field>
+		<field name="arch" type="xml">
+			<kanban default_group_by="specialist">
+				<field name="name"/>
+				<field name="specialist"/>
+				<field name="gender"/>
+				<field name="image"/>
+				<field name="id"/>
+				<progressbar field="gender" colors='{"male":"success", "female":"danger"}'/>
+				<templates>
+					<t t-name="kanban-box">
+						<div class="oe_kanban_global_click">
+							<div class="o_kanban_image">
+								<img t-att-src="kanban_image('hospital.doctor','image',record.id.raw_value)" alt="Image" height="80px" width="60px"/>
+							</div>
+							<div class="oe_kanban_details">
+								<ul>
+									<li>Doctor Name:<field name="name" string="Doctor Name"/></li>
+									<li>Specialist:<field name="specialist"/></li>
+									<li>Gender:<field name="gender"/></li>									
+								</ul>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="view_hospital_doctor_search" model="ir.ui.view">
+		<field name="name">hospital.doctor.search</field>
+		<field name="model">hospital.doctor</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" string="Doctor Name"/>
+				
+				<field name="specialist" string="specialist In"/> 
+				<field name="gender"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_hospital_doctor" model="ir.actions.act_window">
+		<field name="name">Doctors</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">hospital.doctor</field>
+		<field name="view_mode">tree,kanban,form</field>
+		<field name="context">{}</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				creare your first Doctor !!!
+			</p>
+		</field>
+	</record>
+		
+	<menuitem id="menu_doctor" name="Doctor" action="action_hospital_doctor" parent="menu_doctor_master" sequence="800"/>
+		
+</odoo>

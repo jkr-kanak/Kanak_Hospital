@@ -1,0 +1,23 @@
+{
+	'name': 'Hospital Management',
+	'version': '15.0.1.0',
+	'category': 'Hospital',
+	'summary': 'Hospital Management Systems',
+	'description': """ Detail about Staff, Patients and also Doctors""",
+	'author': 'Kanak Infosystems LLP',
+	'company': 'Kanak Infosystems LLP',
+	'website': 'https://kanakinfosystems.com',
+	'license': '',
+	'depends': ['crm'],
+	'data': [
+		'security/ir.model.access.csv',
+		'views/menu.xml',
+		'views/patient_view.xml',
+		'views/doctor_view.xml',
+		'views/appointment_view.xml',
+	],
+	'sequence': -500000,
+	'demo': [],
+	'auto_install': False,
+	'application': True,
+}
